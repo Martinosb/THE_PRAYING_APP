@@ -1,0 +1,20 @@
+build:
+  name: Prepare unsigned iPhone device archive for the publisher
+  steps:
+    - eas/checkout
+    - eas/install_node_modules
+    - eas/prebuild
+    - run:
+        name: Install iOS dependencies
+        working_directory: ios
+        command: pod install
+    - run:
+        name: Archive the release for iPhone devices
+        command: |
+          mkdir -p output
+          xcodebuild -workspace ios/ThePrayingApp.xcworkspace -scheme ThePrayingApp -configuration Release -destination 'generic/platform=iOS' -archivePath "$PWD/output/ThePrayingApp.xcarchive" CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO archive
+          ditto -c -k --keepParent output/ThePrayingApp.xcarchive output/ThePrayingApp-device.xcarchive.zip
+    - eas/upload_artifact:
+        inputs:
+          type: application-archive
+          path: output/ThePrayingApp-device.xcarchive.zip

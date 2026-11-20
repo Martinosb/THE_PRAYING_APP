@@ -1,0 +1,30 @@
+{
+  "build": {
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "production": {
+      "android": {
+        "buildType": "app-bundle"
+      }
+    },
+    "simulator": {
+      "ios": {
+        "simulator": true
+      },
+      "distribution": "internal"
+    },
+    "device-archive": {
+      "config": "device-archive.yml",
+      "ios": {
+        "withoutCredentials": true
+      }
+    }
+  },
+  "cli": {
+    "appVersionSource": "local"
+  }
+}
