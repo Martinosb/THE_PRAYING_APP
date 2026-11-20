@@ -1,0 +1,15 @@
+name: iOS prayer flow
+jobs:
+  simulator:
+    name: Build The Praying App for iOS Simulator
+    type: build
+    params:
+      platform: ios
+      profile: simulator
+  prayer:
+    name: Exercise the prayer book on iOS
+    needs: [simulator]
+    type: maestro
+    params:
+      build_id: ${{ needs.simulator.outputs.build_id }}
+      flow_path: .maestro/prayer.yaml

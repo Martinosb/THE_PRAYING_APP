@@ -1,0 +1,25 @@
+appId: com.connexional.stillhour
+---
+- launchApp:
+    clearState: true
+- assertVisible: "Today’s prayers"
+- takeScreenshot: today
+- tapOn: "Add your first request"
+- tapOn: "Prayer request"
+- inputText: "Peace at home"
+- hideKeyboard
+- tapOn: "Family"
+- tapOn: "Save request"
+- assertVisible: "Peace at home"
+- tapOn: "Mark prayed today"
+- assertVisible: ".*Prayed today"
+- takeScreenshot: detail
+- tapOn: "Mark as answered"
+- assertVisible: "Return to active prayers"
+- stopApp
+- launchApp
+- tapOn: "Requests"
+- tapOn: "Status, active"
+- tapOn: "Answered"
+- assertVisible: ".*Peace at home.*"
+- takeScreenshot: requests
